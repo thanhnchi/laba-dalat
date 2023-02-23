@@ -1,0 +1,43 @@
+﻿@{
+	string categoryTitle = ViewBag.categoryTitle;
+	var breadCrumb = new LABA_WebPortal_Corporate.ViewModels.VM_BreadCrumb
+	{
+		currentName = string.IsNullOrEmpty(categoryTitle) ? "Dịch vụ" : categoryTitle,
+		lv1Name = !string.IsNullOrEmpty(categoryTitle) ? "Dịch vụ" : categoryTitle,
+		lv1Url = string.IsNullOrEmpty(categoryTitle) ? "" : "/dich-vu",
+	};
+}
+@section Scripts{
+	<script src="~/controllers/services.js" asp-append-version="true"></script>
+}
+<input type="hidden" id="input_category_id" value="@ViewBag.categoryId" />
+<input type="hidden" id="input_page" value="@ViewBag.page" />
+<input type="hidden" id="input_record" value="@ViewBag.record" />
+<partial name="P_BreadCrumb" model="breadCrumb" />
+
+<section class="wrapper bg-gradient-reverse-sky">
+	<div class="container py-14">
+		<div class="row">
+			<div class="col-lg-12 mx-auto">
+				<div class="blog grid grid-view">
+					<div class="row isotope gx-md-8 gy-8 mb-8 h-auto" id="div_main_data"></div>
+					<!-- /.row -->
+				</div>
+				<!-- /.blog -->
+				<nav class="d-flex" aria-label="pagination">
+					<ul class="pagination" id="ul_main_pagination"></ul>
+					<!-- /.pagination -->
+				</nav>
+				<!-- /nav -->
+			</div>
+			<!-- /column -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.container -->
+	<div class="overflow-hidden">
+		<div class="divider text-white mx-n2">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 92.26"><path fill="currentColor" d="M1206,21.2c-60-5-119-36.92-291-5C772,51.11,768,48.42,708,43.13c-60-5.68-108-29.92-168-30.22-60,.3-147,27.93-207,28.23-60-.3-122-25.94-182-36.91S30,5.93,0,16.2V92.26H1440v-87l-30,5.29C1348.94,22.29,1266,26.19,1206,21.2Z" /></svg>
+		</div>
+	</div>
+</section>

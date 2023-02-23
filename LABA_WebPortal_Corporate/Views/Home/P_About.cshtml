@@ -1,0 +1,26 @@
+﻿@model LABA_WebPortal_Corporate.Models.M_Home
+
+<section class="wrapper bg-gradient-reverse-sky">
+	<div class="container py-10">
+		<div class="row gx-lg-8 gx-xl-12 gy-10 align-items-center">
+			<div class="col-lg-5">
+				<h2 class="fs-16 text-uppercase text-muted mb-3">Giới thiệu</h2>
+				<h3 class="display-4 mb-3 text-gradient gradient-4">@Model.aboutUsObj?.title</h3>
+				<p>@Model.aboutUsObj?.description</p>
+				<a href="/gioi-thieu" class="btn btn-gradient gradient-6 mt-2">Khám phá ngay</a>
+			</div>
+			<!--/column -->
+			<div class="col-lg-7">
+				<figure><img class="w-auto" src="~/assets/img/other/abouts.svg" alt="@Model.aboutUsObj?.title" /></figure>
+			</div>
+			<!--/column -->
+		</div>
+		<!--/.row -->
+	</div>
+	<!-- /.container -->
+	<div class="overflow-hidden">
+		<div class="divider text-white mx-n2">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100"><path fill="currentColor" d="M1260.2,37.86c-60-10-120-20.07-180-16.76-60,3.71-120,19.77-180,18.47-60-1.71-120-21.78-180-31.82s-120-10-180-1.7c-60,8.73-120,24.79-180,28.5-60,3.31-120-6.73-180-11.74s-120-5-150-5H0V100H1440V49.63C1380.07,57.9,1320.13,47.88,1260.2,37.86Z" /></svg>
+		</div>
+	</div>
+</section>

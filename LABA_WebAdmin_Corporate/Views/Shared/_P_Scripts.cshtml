@@ -1,0 +1,53 @@
+﻿<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="~/assets/js/jquery.min.js"></script>
+<script src="~/assets/js/popper.min.js"></script>
+<script src="~/assets/js/bootstrap.min.js"></script>
+
+<!--plugins-->
+<script src="~/assets/js/bs-custom-file-input.min.js"></script>
+<script src="~/assets/plugins/simplebar/js/simplebar.min.js"></script>
+<script src="~/assets/plugins/metismenu/js/metisMenu.min.js"></script>
+<script src="~/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+
+<!--sweetalert2-->
+<script src="~/assets/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+
+<!--input validation -->
+<script>
+	// Example starter JavaScript for disabling form submissions if there are invalid fields
+	(function () {
+		'use strict';
+		window.addEventListener('load', function () {
+			// Fetch all the forms we want to apply custom Bootstrap validation styles to
+			var forms = document.getElementsByClassName('needs-validation');
+			// Loop over them and prevent submission
+			var validation = Array.prototype.filter.call(forms, function (form) {
+				form.addEventListener('submit', function (event) {
+					if (form.checkValidity() === false) {
+						event.preventDefault();
+						event.stopPropagation();
+					}
+					form.classList.add('was-validated');
+				}, false);
+			});
+		}, false);
+	})();
+</script>
+
+<!--notification js -->
+<script src="~/assets/plugins/notifications/js/lobibox.min.js"></script>
+<script src="~/assets/plugins/notifications/js/notifications.min.js"></script>
+
+<!--ladda-->
+<script src="~/assets/plugins/ladda/spin.min.js"></script>
+<script src="~/assets/plugins/ladda/ladda.min.js"></script>
+
+<!--feather icons-->
+<script src="https://unpkg.com/feather-icons"></script>
+<script>
+	feather.replace()
+</script>
+
+<!-- App JS -->
+<script src="~/assets/js/app.js"></script>
+<script src="~/js/utility_lib.js" asp-append-version="true"></script>

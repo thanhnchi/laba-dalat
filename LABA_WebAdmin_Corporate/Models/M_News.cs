@@ -1,0 +1,61 @@
+﻿using Microsoft.AspNetCore.Http;
+using System;
+using System.ComponentModel.DataAnnotations;
+using static LABA_WebAdmin_Corporate.ExtensionMethods.ValidationAttribute;
+
+namespace LABA_WebAdmin_Corporate.Models
+{
+	public class M_News : M_BaseModel.BaseCustom
+	{
+		public int? id { get; set; }
+		public int? newsCategoryId { get; set; }
+		public int? farmId { get; set; }
+		public string title { get; set; }
+		public string titleSlug { get; set; }
+		public string description { get; set; }
+		public string detail { get; set; }
+		public int? imageId { get; set; }
+		public int? imageSerialId { get; set; }
+		public string linkRef { get; set; }
+		public int? likeNumber { get; set; }
+		public int? viewNumber { get; set; }
+		public int? isHot { get; set; }
+		public int? reOrder { get; set; }
+		public DateTime? publishedAt { get; set; }
+		public string metaTitle { get; set; }
+		public string metaKeyword { get; set; }
+		public string metaDescription { get; set; }
+		public M_NewsCategory categoryObj { get; set; }
+		public M_Image imageObj { get; set; }
+	}
+	public class EM_News : M_BaseModel.BaseCustom
+	{
+		public int id { get; set; }
+		[Required(ErrorMessage = "Vui lòng chọn danh mục !")]
+		public int newsCategoryId { get; set; }
+		public int farmId { get; set; }
+
+		[Required(ErrorMessage = "Vui lòng nhập tiêu đề !")]
+		public string title { get; set; }
+		public string titleSlug { get; set; }
+		public string description { get; set; }
+		public string detail { get; set; }
+		public int? imageId { get; set; }
+		public int? imageSerialId { get; set; }
+		public string linkRef { get; set; }
+		public int likeNumber { get; set; }
+		public int viewNumber { get; set; }
+		public bool isHot { get; set; }
+		public int reOrder { get; set; }
+		public DateTime? publishedAt { get; set; }
+		public string metaTitle { get; set; }
+		public string metaKeyword { get; set; }
+		public string metaDescription { get; set; }
+		public M_NewsCategory categoryObj { get; set; }
+		public M_Image imageObj { get; set; }
+		[DataType(DataType.Upload)]
+		[MaxFileSize(maxFileSize: Lib.CommonConstants.MAX_FILE_SIZE_IMAGE_UPLOAD * 1024 * 1024, errorMessage: "Dung lượng ảnh tối đa 10MB!")]
+		[AllowedExtensions(extensions: new string[] { ".jpg", ".jpeg", ".png", ".ico", ".svg" }, errorMessage: "Hình ảnh không hợp lệ !")]
+		public IFormFile imageFile { get; set; }
+	}
+}

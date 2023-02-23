@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<title>@ViewData["Title"]</title>
+	<partial name="_P_Styles" />
+	@await RenderSectionAsync(name: "styles", required: false)
+</head>
+
+<body class="bg-login">
+	<!-- wrapper -->
+	<div class="wrapper">
+		<div class="section-authentication-login vh-100">
+			@RenderBody()
+		</div>
+	</div>
+	<!-- end wrapper -->
+
+	<partial name="_P_Scripts" />
+	<partial name="_P_ValidationScripts" />
+	@await RenderSectionAsync(name: "scripts", required: false)
+</body>
+
+</html>

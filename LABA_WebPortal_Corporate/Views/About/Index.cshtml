@@ -1,0 +1,107 @@
+﻿@model LABA_WebPortal_Corporate.Models.M_About
+@{
+	var breadCrumb = new LABA_WebPortal_Corporate.ViewModels.VM_BreadCrumb
+	{
+		lv1Name = "Giới thiệu",
+		lv1Url = "gioi-thieu",
+		currentName = Model.title
+	};
+	var related = ViewBag.ListRelated as List<M_About>;
+}
+<partial name="P_BreadCrumb" model="breadCrumb" />
+
+<section class="wrapper bg-gradient-reverse-sky">
+	<div class="container pb-14 pb-md-16">
+		<div class="row">
+			<div class="col-lg-10 mx-auto">
+				<div class="blog single mt-14">
+					<div class="card">
+						<figure class="card-img-top">
+							<img src="@Model.imageObj?.relativeUrl" class="h-auto" style="object-fit: cover" alt="@Model.title" title="@Model.title" />
+						</figure>
+						<div class="card-body p-3 p-md-6">
+							<div class="classic-view">
+								<article class="post">
+									<div class="post-content mb-5">
+										<h2 class="h1 mb-4">@Model.title</h2>
+										<blockquote class="fs-lg my-8">
+											<p class="fs-17">@Model.description</p>
+										</blockquote>
+										<p>@Html.Raw(Model.detail)</p>
+									</div>
+									<!-- /.post-content -->
+								</article>
+								<!-- /.post -->
+							</div>
+							<!-- /.classic-view -->
+							<hr />
+							<h2 class="mb-6">
+								Bài giới thiệu liên quan
+							</h2>
+							<div class="swiper-container blog grid-view mb-5" data-margin="30" data-dots="true" data-items-md="2" data-items-xs="1">
+								<div class="swiper">
+									<div class="swiper-wrapper">
+										@if (related.Count > 0)
+										{
+											@foreach (var item in related)
+											{
+												var link = "/gioi-thieu/" + item.titleSlug + "-" + item.id;
+												<div class="swiper-slide my-1">
+													<div class="card">
+														<figure class="card-img-top overlay overlay-1 hover-scale">
+															<a href="@link"> <img src="@item.imageObj?.relativeUrl" style="object-fit: cover" class="h-21" alt="@item.title" /></a>
+															<figcaption>
+																<h5 class="from-top mb-0">Xem</h5>
+															</figcaption>
+														</figure>
+														<div class="card-body p-3">
+															<div class="post-header">
+																<!-- /.post-category -->
+																<h2 class="text-truncate-1 mt-1 mb-3 h3">
+																	<a class="link-dark" href="@link" title="@item.title">@item.title</a>
+																</h2>
+															</div>
+															<!-- /.post-header -->
+															<div class="post-content">
+																<p class="text-truncate-3">@item.description</p>
+															</div>
+															<!-- /.post-content -->
+														</div>
+														<!--/.card-body -->
+													</div>
+													<!-- /article -->
+												</div>
+												<!--/.swiper-slide -->
+											}
+										}
+										else
+										{
+											<div class="d-flex align-items-center flex-column">
+												<img class="w-auto d-flex m-auto" src="/assets/img/other/empty.png">
+												<span class="text-muted">Không có dữ liệu !</span>
+											</div>
+										}
+									</div>
+									<!--/.swiper-wrapper -->
+								</div>
+								<!-- /.swiper -->
+							</div>
+							<!-- /.swiper-container -->
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.blog -->
+			</div>
+			<!-- /column -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.container -->
+	<div class="overflow-hidden">
+		<div class="divider text-white mx-n2">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100"><path fill="currentColor" d="M1260,1.65c-60-5.07-119.82,2.47-179.83,10.13s-120,11.48-180,9.57-120-7.66-180-6.42c-60,1.63-120,11.21-180,16a1129.52,1129.52,0,0,1-180,0c-60-4.78-120-14.36-180-19.14S60,7,30,7H0v93H1440V30.89C1380.07,23.2,1319.93,6.15,1260,1.65Z" /></svg>
+		</div>
+	</div>
+</section>

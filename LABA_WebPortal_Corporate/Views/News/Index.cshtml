@@ -1,0 +1,83 @@
+﻿@model IEnumerable<LABA_WebPortal_Corporate.Models.M_News>
+@{
+	string categoryTitle = ViewBag.categoryTitle;
+	var breadCrumb = new LABA_WebPortal_Corporate.ViewModels.VM_BreadCrumb
+	{
+		currentName = string.IsNullOrEmpty(categoryTitle) ? "Tin tức" : categoryTitle,
+		lv1Name = !string.IsNullOrEmpty(categoryTitle) ? "Tin tức" : categoryTitle,
+		lv1Url = string.IsNullOrEmpty(categoryTitle) ? "" : "/tin-tuc",
+	};
+}
+@section Scripts{
+	<script src="~/assets/libs/moment/moment.js"></script>
+	<script src="~/controllers/news.js" asp-append-version="true"></script>
+}
+<input type="hidden" id="input_category_id" value="@ViewBag.categoryId" />
+<input type="hidden" id="input_page" value="@ViewBag.page" />
+<input type="hidden" id="input_record" value="@ViewBag.record" />
+<partial name="P_BreadCrumb" model="breadCrumb" />
+
+<section class="wrapper bg-gradient-reverse-sky">
+	<div class="container py-14">
+		<div class="row gx-lg-8 gx-xl-12">
+			<div class="col-lg-8">
+				<div class="blog classic-view">
+					<article class="post">
+						<div id="div_main_data"></div>
+						<!-- /.post item-->
+						<nav class="d-flex" aria-label="pagination">
+							<ul class="pagination" id="ul_main_pagination">
+							</ul>
+							<!-- /.pagination -->
+						</nav>
+					</article>
+					<!-- /.post -->
+				</div>
+				<!-- /.blog -->
+			</div>
+			<!-- /column -->
+			<aside class="col-lg-4 sidebar">
+				<div class="widget">
+					<h4 class="widget-title mb-3">Tin mới</h4>
+					<ul class="image-list">
+						@if (Model.ToList().Count() > 0)
+						{
+							foreach (var item in Model)
+							{
+								var link = "/tin-tuc/" + item.titleSlug + "-" + item.id;
+								<li>
+									<figure class="rounded">
+										<a href="@link"><img src="@item.imageObj?.relativeUrl" alt="@item.title" class="h-10" style="object-fit: cover" /></a>
+									</figure>
+									<div class="post-content">
+										<h6 class="mb-2 text-truncate-2"> <a class="link-dark" href="@link">@item.title</a> </h6>
+										<ul class="post-meta">
+											<li class="post-date"><i class="uil uil-calendar-alt"></i><span>@item.publishedAt?.ToString("dd/MM/yyyy")</span></li>
+										</ul>
+									</div>
+								</li>
+							}
+						}
+						else
+						{
+							<li class="d-flex align-items-center flex-column">
+								<img class="w-auto d-flex m-auto" src="/assets/img/other/empty.png">
+								<span class="text-muted">Không có dữ liệu !</span>
+							</li>
+						}
+					</ul>
+					<!-- /.image-list -->
+				</div>
+				<!-- /.widget -->
+			</aside>
+			<!-- /column .sidebar -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.container -->
+	<div class="overflow-hidden">
+		<div class="divider text-white mx-n2">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100"><path fill="currentColor" d="M1260,1.65c-60-5.07-119.82,2.47-179.83,10.13s-120,11.48-180,9.57-120-7.66-180-6.42c-60,1.63-120,11.21-180,16a1129.52,1129.52,0,0,1-180,0c-60-4.78-120-14.36-180-19.14S60,7,30,7H0v93H1440V30.89C1380.07,23.2,1319.93,6.15,1260,1.65Z" /></svg>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,75 @@
+﻿@model LABA_WebPortal_Corporate.Models.M_Home
+<section class="wrapper bg-light">
+	<div class="container py-10">
+		<div class="row text-center">
+			<div class="col-lg-9 col-xl-8 col-xxl-7 mx-auto">
+				@*<h2 class="fs-16 text-uppercase text-gradient gradient-1 mb-3">Tin tức</h2>*@
+				<h3 class="display-4 mb-9 me-lg-n5">
+					Tin nổi bật
+				</h3>
+			</div>
+			<!-- /column -->
+		</div>
+		<!-- /.row -->
+		<div class="swiper-container blog grid-view mb-17 mb-md-20" data-autoplay="true" data-autoplaytime="2000" data-margin="30" data-dots="true" data-items-xl="3" data-items-md="2" data-items-xs="1">
+			<div class="swiper">
+				<div class="swiper-wrapper">
+					@if (Model.newObjs.Count > 0)
+					{
+						@foreach (var item in Model.newObjs)
+						{
+							var link = "/tin-tuc/" + item.titleSlug + "-" + item.id;
+							<div class="swiper-slide my-1">
+								<div class="card">
+									<figure class="card-img-top overlay overlay-1 hover-scale">
+										<a href="@link"> <img src="@item.imageObj?.relativeUrl" class="h-21" alt="@item.title" style="object-fit: cover" /></a>
+										<figcaption>
+											<h5 class="from-top mb-0">Xem chi tiết</h5>
+										</figcaption>
+									</figure>
+									<div class="card-body p-3">
+										<div class="post-header">
+											<div class="post-category text-line">
+												<a href="/tin-tuc?c=@item.newsCategoryId" class="hover" rel="category">@item.categoryObj?.name</a>
+											</div>
+											<!-- /.post-category -->
+											<h2 class="text-truncate-1  mt-1 mb-3 h3">
+												<a class="link-dark" href="@link" title="@item.title">@item.title</a>
+											</h2>
+										</div>
+										<!-- /.post-header -->
+										<div class="post-content">
+											<p class="text-truncate-3">@item.description</p>
+										</div>
+										<!-- /.post-content -->
+									</div>
+									<!--/.card-body -->
+									<div class="card-footer">
+										<ul class="post-meta d-flex mb-0">
+											<li class="post-date"><i class="uil uil-calendar-alt"></i><span>@item.publishedAt?.ToString("dd/MM/yyyy")</span></li>
+										</ul>
+										<!-- /.post-meta -->
+									</div>
+									<!-- /.card-footer -->
+								</div>
+								<!-- /.card -->
+							</div>
+							<!--/.swiper-slide -->
+						}
+					}
+					else
+					{
+						<div class="d-flex align-items-center flex-column">
+							<img class="w-auto d-flex m-auto" src="/assets/img/other/empty.png">
+							<span class="text-muted">Không có dữ liệu !</span>
+						</div>
+					}
+				</div>
+				<!--/.swiper-wrapper -->
+			</div>
+			<!-- /.swiper -->
+		</div>
+		<!-- /.swiper-container -->
+	</div>
+	<!-- /.container -->
+</section>

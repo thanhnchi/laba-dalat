@@ -1,0 +1,102 @@
+﻿@{
+	ViewData["Title"] = "Quản lý danh mục dịch vụ";
+	var breadCrumb = new LABA_WebAdmin_Corporate.ViewModels.VM_BreadCrumb
+	{
+		ParentName = "Trang chủ",
+		ParentUrl = "/",
+		CurrentName = "Danh mục dịch vụ"
+	};
+}
+
+@section Styles {
+	<partial name="_P_ViewStyles" />
+	<partial name="_P_DataTableStyles" />
+}
+@section Scripts {
+	<partial name="_P_ViewScripts" />
+	<partial name="_P_DataTableScripts" />
+	<script src="~/controllers/services_category_manage.js" asp-append-version="true"></script>
+}
+
+<partial name="_P_BreadCrumb" model="breadCrumb" />
+
+<div class="card">
+	<div class="card-body" id="div_main_table">
+		<div class="card-title">
+			<div class="row align-items-center">
+				<div class="col-8 col-md-auto order-1 order-md-1 mb-3 mb-md-0">
+					<div class="btn-group btn-group-sm" role="group">
+						<button type="button" class="btn btn-light-success" disabled>
+							<i class="bx bx-plus"></i>
+						</button>
+						<button type="button" class="btn btn-success" onclick="ShowAddModal(this)">
+							Thêm mới
+						</button>
+					</div>
+				</div>
+				<div class="col-12 col-md-auto order-4 order-md-2">
+					<div class="input-group input-group-sm flex-nowrap justify-content-center justify-content-md-end">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="status">Trạng thái</label>
+						</div>
+						<select class="selectpicker" data-style="btn-light btn-sm bg-white" id="select_search_status" onchange="Search(this)">
+							<option value="0,1" class="">Tất cả</option>
+							<option value="0" class="text-danger">Khóa</option>
+							<option value="1" class="text-success">Kích hoạt</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-4 col-md-auto order-2  order-md-3 flex-grow-1  mb-3 mb-md-0">
+					<div class="input-group-prepend d-flex justify-content-end">
+						<button type="button" class="btn btn-light btn-sm" data-style="zoom-in" id="btn_search" onclick="Search(this)" data-toggle="tooltip" data-placement="top" title="Làmm mới">
+							<i class="bx bx-sync"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr />
+		<div class="table-responsive">
+			<table id="table_main" class="table table-striped table-bordered w-100 rounded">
+				<thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Ảnh</th>
+                        <th>Tên danh mục</th>
+                        <th>Mô tả</th>
+                        <th>Thứ tự</th>
+                        <th>Trạng thái</th>
+                        <th>Ngày tạo</th>
+                        <th>Ngày cập nhật</th>
+                        <th>Thao tác</th>
+                    </tr>
+				</thead>
+				<tfoot>
+                    <tr>
+                        <th>STT</th>
+                        <th>Ảnh</th>
+                        <th>Tên danh mục</th>
+                        <th>Mô tả</th>
+                        <th>Thứ tự</th>
+                        <th>Trạng thái</th>
+                        <th>Ngày tạo</th>
+                        <th>Ngày cập nhật</th>
+                        <th>Thao tác</th>
+                    </tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modal_add" tabindex="-1" role="dialog" aria-hidden="true">
+		<partial name="P_Add" />
+	</div>
+
+	<div class="modal fade" id="modal_edit" tabindex="-1" role="dialog" aria-hidden="true">
+		<partial name="P_Edit" />
+	</div>
+
+	<div class="modal fade" id="modal_view" tabindex="-1" role="dialog" aria-hidden="true">
+		<partial name="P_View" />
+	</div>
+</div>

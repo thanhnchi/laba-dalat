@@ -1,0 +1,127 @@
+﻿
+@model LABA_WebAdmin_Corporate.Models.EM_News
+
+
+<div class="card-title">
+	<div class="row align-items-center">
+		<div class="col-12 mb-3 mb-lg-0">
+			<button class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Quay lại" onclick="BackToTable('#div_main_table', '#div_edit_panel')">
+				<i class="bx bx-left-arrow-alt"></i>
+			</button>
+		</div>
+		<div class="col-12">
+			<h1 class="h5 text-center text-primary text-uppercase text-truncate-1 font-weight-bold m-0" id="header_edit_title"></h1>
+		</div>
+	</div>
+</div>
+<hr />
+<form method="post" class="needs-validation" novalidate id="form_data_edit" asp-antiforgery="true">
+	<input type="hidden" asp-for="id" />
+	<input type="hidden" asp-for="farmId" />
+	<input type="hidden" asp-for="reOrder" />
+	<input type="hidden" asp-for="imageId" />
+	<input type="hidden" asp-for="imageSerialId" />
+	<input type="hidden" asp-for="timer" />
+	<input type="hidden" asp-for="status" />
+
+	<div class="row">
+		<div class="col-lg-9">
+			<div class="card">
+				<div class="card-header">
+					<h6 class="text-primary mb-0">Thông tin</h6>
+				</div>
+				<div class="card-body">
+					<div class="form-group">
+						<label asp-for="title" class="text-muted">Tiêu đề: <span class="text-danger">*</span></label>
+						<input asp-for="title" class="form-control form-control-sm" required />
+						<span asp-validation-for="title" class="invalid-tooltip"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="linkRef" class="text-muted">Nguồn tin: </label>
+						<input asp-for="linkRef" class="form-control form-control-sm" />
+						<span asp-validation-for="linkRef" class="invalid-tooltip"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="description" class="text-muted">Mô tả: </label>
+						<textarea asp-for="description" rows="3" class="form-control form-control-sm"></textarea>
+					</div>
+					<div class="form-group">
+						<label asp-for="detail" class="text-muted">Chi tiết: </label>
+						<input type="hidden" asp-for="detail" />
+						<div id="div_editor_detail_edit"></div>
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card-header">
+					<h6 class="text-primary mb-0">Thông tin SEO</h6>
+				</div>
+				<div class="card-body">
+					<div class="form-group">
+						<label asp-for="metaTitle" class="text-muted">Tiêu đề SEO: </label>
+						<input asp-for="metaTitle" class="form-control form-control-sm" />
+					</div>
+					<div class="form-group">
+						<label asp-for="metaKeyword" class="text-muted">Từ khoá SEO: </label>
+						<input asp-for="metaKeyword" class="form-control form-control-sm" />
+					</div>
+					<div class="form-group">
+						<label asp-for="metaDescription" class="text-muted">Mô tả SEO: </label>
+						<textarea asp-for="metaDescription" rows="3" class="form-control form-control-sm"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3">
+			<div class="card">
+				<div class="card-header">
+					<div class="d-flex justify-content-between align-items-center">
+						<h6 class="mb-0 text-primary">Hình ảnh</h6>
+						<a href="javascript:void(0);" onclick="ShowHideImageUploadAndView('#btn_upload')" data-toggle="tooltip" data-placement="top" data-original-title="Tải ảnh lên" id="btn_upload_image">
+							<i class="bx bx-upload" id="btn_upload"></i>
+						</a>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="form-group mb-0">
+						<div id="div_view_image_edit" class="text-center">
+							<img src="" class="img-thumbnail" id="edit_image" style="object-fit: cover; height: 170px !important; width: 100% !important " />
+						</div>
+						<div id="div_upload_image_edit" style="display: none;">
+							<input type="file" asp-for="imageFile" class="dropify" data-plugins="dropify" data-max-file-size-preview="10M" data-height="170" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card-header">
+					<h6 class="mb-0 text-primary">Hoàn thành</h6>
+				</div>
+				<div class="card-body">
+					<div class="form-group">
+						<div class="form-group d-flex align-items-center  mb-3">
+							<label for="input_edit_ishot" class="text-muted mb-0 mr-2">Nổi bật:</label>
+							<div class="custom-control custom-switch">
+								<input asp-for="isHot" id="input_edit_ishot" type="checkbox" class="custom-control-input">
+								<label class="custom-control-label" for="input_edit_ishot"></label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label asp-for="publishedAt" class="text-muted">Ngày đăng:</label>
+						<input asp-for="publishedAt" data-mindate="today" type="text" class="form-control form-control-sm bg-white" />
+					</div>
+					<div class="form-group mb-0">
+						<label asp-for="newsCategoryId" class="text-muted">Danh mục: <span class="text-danger">*</span></label>
+						<select asp-for="newsCategoryId" class="selectpicker show-tick mw-100" data-style="btn-light btn-sm bg-white font-14" required>
+						</select>
+						<span asp-validation-for="newsCategoryId" class="invalid-tooltip"></span>
+					</div>
+				</div>
+				<div class="card-footer">
+					<button class="btn btn-success btn-sm btn-block" type="submit" data-style="zoom-in" id="btn_submit_form_edit">Lưu thay đổi</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

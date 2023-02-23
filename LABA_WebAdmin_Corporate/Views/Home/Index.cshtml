@@ -1,0 +1,10 @@
+﻿@{
+	ViewData["Title"] = "Laba The Eco Parks - Dashboard";
+	var breadCrumb = new LABA_WebAdmin_Corporate.ViewModels.VM_BreadCrumb
+	{
+		ParentName = "Trang chủ", 
+		CurrentName = "Home"
+	};
+}
+
+<partial name="_P_BreadCrumb" model="breadCrumb" />

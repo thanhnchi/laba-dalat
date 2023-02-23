@@ -1,0 +1,79 @@
+﻿@model LABA_WebAdmin_Corporate.Models.EM_NewsCategory
+<div class="modal-dialog modal-dialog-centered">
+	<div class="modal-content border-0">
+		<div class="modal-header border-bottom-0 bg-warning align-items-center p-3">
+			<h5 class="flex-grow-1 text-center text-uppercase lis-font-weight-500 mb-0 text-white">Cập nhật</h5>
+			<button type="button" class="close text-white-50" style="opacity:1" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body p-3">
+			<form method="post" asp-antiforgery="true" class="needs-validation" novalidate id="form_data_edit">
+				<input type="hidden" asp-for="id" />
+				<input type="hidden" asp-for="farmId" />
+				<input type="hidden" asp-for="typeId" />
+				<input type="hidden" asp-for="imageId" />
+				<input type="hidden" asp-for="imageSerialId" />
+				<input type="hidden" asp-for="status" />
+				<input type="hidden" asp-for="timer" />
+
+				<div class="card mb-3">
+					<div class="card-header p-1">
+						<div class="d-flex align-items-center text-primary lis-font-weight-500">
+							<i class="bx bx-info-circle"></i>
+							<span class="ml-1">Thông tin</span>
+						</div>
+					</div>
+					<div class="card-body">
+						<div class="form-group mb-2 row">
+							<label asp-for="name" class="col-sm-4 col-form-label">Tên danh mục: <span class="text-danger">*</span></label>
+							<div class="col-sm-8">
+								<input asp-for="name" class="form-control form-control-sm" placeholder="Nhập tên danh mục" required>
+								<span asp-validation-for="name" class="invalid-tooltip"></span>
+							</div>
+						</div>
+						<div class="form-group mb-2 row">
+							<label asp-for="reOrder" class="col-sm-4 col-form-label">Thứ tự: <span class="text-danger">*</span></label>
+							<div class="col-sm-8">
+								<input asp-for="reOrder" min="0" type="number" class="form-control form-control-sm" placeholder="Nhập thứ tự" required>
+								<span asp-validation-for="reOrder" class="invalid-tooltip"></span>
+							</div>
+						</div>
+						<div class="form-group mb-2 row">
+							<label asp-for="description" class="col-sm-4 col-form-label">Mô tả:</label>
+							<div class="col-sm-8">
+								<textarea asp-for="description" rows="3" class="form-control form-control-sm" placeholder="Nhập mô tả"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card m-0">
+					<div class="card-header p-1">
+						<div class="d-flex align-items-center justify-content-between">
+							<div class="d-flex align-items-center text-primary lis-font-weight-500">
+								<i class="bx bx-image-alt"></i>
+								<span class="ml-1">Hình ảnh</span>
+							</div>
+							<a href="javascript:void(0);" onclick="ShowHideImageUploadAndView('#btn_upload')" data-toggle="tooltip" data-placement="top" data-original-title="Tải ảnh lên" id="btn_upload_image">
+								<i class="bx bx-upload" id="btn_upload"></i>
+							</a>
+						</div>
+					</div>
+					<div class="card-body">
+						<div class="form-group mb-0">
+							<div id="div_view_image_edit" class="text-center">
+								<img src="" class="img-thumbnail" id="edit_image" style="object-fit: cover; height: 150px !important" />
+							</div>
+							<div id="div_upload_image_edit" style="display: none;">
+								<input type="file" asp-for="imageFile" class="dropify" data-plugins="dropify" data-max-file-size-preview="10M" data-height="150" />
+							</div>
+						</div>
+					</div>
+					<div class="card-footer">
+						<button class="btn btn-success btn-block" type="submit" id="btn_submit_form_edit">Lưu</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

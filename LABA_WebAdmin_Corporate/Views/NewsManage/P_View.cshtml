@@ -1,0 +1,86 @@
+﻿
+<div class="card-title">
+	<div class="row align-items-center">
+		<div class="col-md-2 mb-3 mb-lg-0">
+			<button class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Quay lại" onclick="BackToTable('#div_main_table', '#div_view_panel')">
+				<i class="bx bx-left-arrow-alt"></i>
+			</button>
+		</div>
+		<div class="col-md-10">
+			<h1 class="h5 text-center text-primary text-uppercase text-truncate-1 font-weight-bold m-0" id="header_view_title"></h1>
+		</div>
+	</div>
+</div>
+<hr />
+<div class="row">
+	<div class="col-lg-9 order-2 order-lg-1">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title text-primary" id="view_title">Tiêu đề</h4>
+				<blockquote>
+					<p class="text-muted m-0" id="view_description">Mô tả</p>
+				</blockquote>
+				<p id="view_detail">
+					Chi tiết
+				</p>
+			</div>
+			<div class="card-footer">
+				<div class="form-group mb-0">
+					<label class="mb-0">Nguồn tin: </label>
+					<a href="#" class="text-secondary" id="view_link_ref">https:tttt</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-3">
+		<div class="row">
+			<div class="col-md-6 col-lg-12 order-3  order-lg-2">
+				<div class="card">
+					<div class="card-header d-flex align-items-center font-weight-bolder text-primary">
+						<i class="bx bx-history font-20 mr-1"></i>
+						<span>Nhật ký</span>
+					</div>
+					<div class="card-body">
+						<div class="">
+							<label class="font-weight-bolder text-secondary">Ngày tạo:</label>
+							<div class="media align-items-center">
+								<div>
+									<img src="https://via.placeholder.com/110x110" width="40" height="40" class="rounded-circle shadow p-1" id="img_created_user_avatar" />
+								</div>
+								<div class="media-body ml-2">
+									<p class="mb-0 font-weight-bolder" id="view_created_by"></p>
+									<small class="mb-0 text-secondary" id="view_created_at"></small>
+								</div>
+							</div>
+						</div>
+						<div class="dropdown-divider"></div>
+						<div class="">
+							<label class="font-weight-bolder text-secondary">Ngày cập nhật:</label>
+							<div class="media align-items-center">
+								<div>
+									<img src="https://via.placeholder.com/110x110" width="40" height="40" class="rounded-circle shadow p-1" id="img_updated_user_avatar" />
+								</div>
+								<div class="media-body ml-2">
+									<p class="mb-0 font-weight-bolder" id="view_updated_by"></p>
+									<small class="mb-0 text-secondary" id="view_updated_at"></small>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 col-lg-12 order-1  order-lg-3">
+				<div class="card">
+					<div class="card-header d-flex align-items-center font-weight-bolder text-primary">
+						<i class="bx bx-image font-20 mr-1"></i>
+						<span>Hình ảnh</span>
+					</div>
+					<div class="card-body text-center">
+						<img src="" class="mw-100 rounded" style="object-fit: contain" id="view_image" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

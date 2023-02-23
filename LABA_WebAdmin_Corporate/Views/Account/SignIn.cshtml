@@ -1,0 +1,51 @@
+﻿@model LABA_WebAdmin_Corporate.Models.EM_AccountSignIn
+@{
+	ViewData["Title"] = "Laba The Eco Parks - Đăng nhập";
+	Layout = "~/Views/Shared/_LayoutExternal.cshtml";
+}
+@section scripts{
+	<script src="~/controllers/account_sign_in.js" asp-append-version="true"></script>
+}
+
+<div class="row no-gutters h-100">
+	<div class="col-lg-4 m-auto">
+		<div class="card radius-10">
+			<div class="card-body p-md-5">
+				<div class="text-center">
+					<a href="https://kadonecopark.com" target="_blank">
+						<img src="~/assets/images/logo/laba_logo.png" width="130" />
+					</a>
+				</div>
+				<form class="needs-validation" method="post" asp-antiforgery="true" novalidate id="form_data">
+					<div class="form-group mt-4">
+						<label asp-for="userName">Tài khoản</label>
+						<input asp-for="userName" type="text" class="form-control" placeholder="Nhập tài khoản" required />
+						<span asp-validation-for="userName" class="invalid-tooltip"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="password">Mật khẩu</label>
+						<div class="input-group">
+							<input asp-for="password" type="password" class="form-control" placeholder="Nhập mật khẩu" required />
+							<span asp-validation-for="password" class="invalid-tooltip"></span>
+							<div class="input-group-append" style="cursor: pointer" onclick="ShowPassword(this)">
+								<span class="input-group-text">
+									<i class="text-primary" data-feather="eye-off" id="password_show"></i>
+									<i class="text-primary" data-feather="eye" id="password_hide" style="display: none;"></i>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="custom-control custom-switch">
+							<input asp-for="stayLoggedIn" type="checkbox" class="custom-control-input" checked>
+							<label asp-for="stayLoggedIn" class="custom-control-label">Duy trì đăng nhập</label>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary btn-block mt-3" data-style="zoom-in" id="btn_submit_form">Đăng nhập</button>
+				</form>
+			</div>
+			<!--end row-->
+		</div>
+	</div>
+</div>
+

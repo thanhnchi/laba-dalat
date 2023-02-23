@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<title>@ViewData["Title"]</title>
+	<partial name="_P_Styles" />
+	@await RenderSectionAsync(name: "Styles", required: false)
+</head>
+
+<body>
+	<!-- wrapper -->
+	<div class="wrapper">
+		<!--sidebar-wrapper-->
+		<partial name="P_Navigation" />
+		<!--end sidebar-wrapper-->
+		<!--header-->
+		<partial name="P_Header" />
+		<!--end header-->
+		<!--page-wrapper-->
+		<div class="page-wrapper">
+			<!--page-content-wrapper-->
+			<div class="page-content-wrapper">
+				<div class="page-content p-0 p-md-3">
+					@RenderBody()
+				</div>
+			</div>
+			<!--end page-content-wrapper-->
+		</div>
+		<!--end page-wrapper-->
+		<!--footer -->
+		<partial name="P_Footer" />
+		<!-- end footer -->
+	</div>
+	<!-- end wrapper -->
+	<partial name="P_SignOutModel" />
+	<!-- JavaScript -->
+	<partial name="_P_Scripts" />
+	<partial name="_P_ValidationScripts" />
+	@await RenderSectionAsync(name: "Scripts", required: false)
+</body>
+
+</html>

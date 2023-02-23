@@ -1,0 +1,342 @@
+﻿@model LABA_WebAdmin_Corporate.Models.EM_Farm
+@{
+	ViewData["Title"] = "Quản lý thông tin doanh nghiệp";
+	var breadCrumb = new LABA_WebAdmin_Corporate.ViewModels.VM_BreadCrumb
+	{
+		ParentName = "Trang chủ",
+		ParentUrl = "/",
+		CurrentName = "Thông tin doanh nghiệp"
+	};
+}
+
+@section Styles{
+	<!--select2-->
+	<link href="~/assets/plugins/select2/css/select2.min.css" rel="stylesheet" />
+	<link href="~/assets/plugins/select2/css/select2-bootstrap4.css" rel="stylesheet" />
+	<link href="~/css/map_style.css" rel="stylesheet" />
+}
+
+@section Scripts{
+	<!--select2-->
+	<script src="~/assets/plugins/select2/js/select2.min.js"></script>
+	<script>
+		$('.single-select').select2({
+			theme: 'bootstrap4',
+			width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+			placeholder: $(this).data('placeholder'),
+			allowClear: Boolean($(this).data('allow-clear')),
+		});
+	</script>
+	<!-- google maps api -->
+	<script src="~/libs/maps/gmaps.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=@ViewData["KeyGoogleMap"]&callback=initMap&libraries=places&v=weekly" async defer></script>
+
+	<script src="~/controllers/farm_manage.js" asp-append-version="true"></script>
+}
+
+<partial name="_P_BreadCrumb" model="breadCrumb" />
+
+<form method="post" asp-antiforgery="true" class="needs-validation" novalidate id="form_data">
+	<input type="hidden" asp-for="id" />
+	<input type="hidden" asp-for="businessTypeId" />
+	<input type="hidden" asp-for="addressId" />
+
+	<input type="hidden" asp-for="imageLogo" />
+	<input type="hidden" asp-for="imageFavicon" />
+	<input type="hidden" asp-for="imageQrcode" />
+	<input type="hidden" asp-for="timer" value="@Model.timer?.ToString("O")" />
+
+	<input type="hidden" asp-for="addressObj.id" />
+	<input type="hidden" asp-for="addressObj.countryId" />
+	<input type="hidden" asp-for="addressObj.addressNumber" />
+	<input type="hidden" asp-for="addressObj.status" />
+	<input type="hidden" asp-for="addressObj.latitude" id="Latitude" />
+	<input type="hidden" asp-for="addressObj.longitude" id="Longitude" />
+	<input type="hidden" asp-for="addressObj.timer" value="@Model.addressObj?.timer?.ToString("O")" />
+
+	<div class="row">
+		<div class="col-lg-9">
+			<div class="card-collapse">
+				<div class="card mm-active">
+					<div class="card-header">
+						<div class="d-flex align-items-center font-weight-bolder text-primary">
+							<i class="bx bx-info-circle font-20"></i>
+							<span class="ml-2 text-uppercase">Thông tin</span>
+						</div>
+					</div>
+					<div class="card-body">
+						<div class="form-group row mb-3">
+							<label asp-for="name" class="col-sm-3 col-xl-3 col-form-label font-weight-bolder text-muted">Tên đầy đủ: <span class="text-danger">*</span></label>
+							<div class="col-sm-9 col-xl-9">
+								<input asp-for="name" class="form-control form-control-sm" placeholder="Tên đầy đủ" required>
+								<span asp-validation-for="name" class="invalid-tooltip"></span>
+							</div>
+						</div>
+						<div class="form-group row mb-3">
+							<label asp-for="slogan" class="col-sm-3 col-xl-3 col-form-label font-weight-bolder text-muted">Slogan:</label>
+							<div class="col-sm-9 col-xl-9">
+								<input asp-for="slogan" class="form-control form-control-sm" placeholder="Slogan">
+							</div>
+						</div>
+						<div class="form-group row mb-3">
+							<label asp-for="description" class="col-sm-3 col-xl-3 col-form-label font-weight-bolder text-muted">Mô tả:</label>
+							<div class="col-sm-9 col-xl-9">
+								<textarea asp-for="description" rows="3" class="form-control form-control-sm" placeholder="Mô tả" spellcheck="false"></textarea>
+							</div>
+						</div>
+						<div class="form-group row mb-3">
+							<label asp-for="email" class="col-sm-3 col-xl-3 col-form-label font-weight-bolder text-muted">Email: <span class="text-danger">*</span></label>
+							<div class="col-sm-9 col-xl-9">
+								<input asp-for="email" type="email" class="form-control form-control-sm" placeholder="Email" required>
+								<span asp-validation-for="email" class="invalid-tooltip"></span>
+							</div>
+						</div>
+						<div class="form-group row mb-3">
+							<label asp-for="telephoneNumber" class="col-sm-3 col-xl-3 col-form-label font-weight-bolder text-muted">Điện thoại: <span class="text-danger">*</span></label>
+							<div class="col-sm-9 col-xl-9">
+								<input asp-for="telephoneNumber" class="form-control form-control-sm" placeholder="Điện thoại" required>
+								<span asp-validation-for="telephoneNumber" class="invalid-tooltip"></span>
+							</div>
+						</div>
+						<div class="form-group row mb-3">
+							<label asp-for="taxCode" class="col-sm-3 col-xl-3 col-form-label font-weight-bolder text-muted">Mã số thuế:</label>
+							<div class="col-sm-9 col-xl-9">
+								<input asp-for="taxCode" class="form-control form-control-sm" placeholder="Mã số thuế">
+							</div>
+						</div>
+						<div class="form-group row mb-3">
+							<label asp-for="faceBook" class="col-sm-3 col-xl-3 col-form-label font-weight-bolder text-muted">Facebook:</label>
+							<div class="col-sm-9 col-xl-9">
+								<input asp-for="faceBook" class="form-control form-control-sm" placeholder="Link Facebook">
+							</div>
+						</div>
+						<div class="form-group row mb-3">
+							<label asp-for="twitter" class="col-sm-3 col-xl-3 col-form-label font-weight-bolder text-muted">Twitter:</label>
+							<div class="col-sm-9 col-xl-9">
+								<input asp-for="twitter" class="form-control form-control-sm" placeholder="Link Twitter">
+							</div>
+						</div>
+						<div class="form-group row mb-3">
+							<label asp-for="instagram" class="col-sm-3 col-xl-3 col-form-label font-weight-bolder text-muted">Instagram:</label>
+							<div class="col-sm-9 col-xl-9">
+								<input asp-for="instagram" class="form-control form-control-sm" placeholder="Link Instagram">
+							</div>
+						</div>
+						<div class="form-group row mb-3">
+							<label asp-for="zalo" class="col-sm-3 col-xl-3 col-form-label font-weight-bolder text-muted">Zalo:</label>
+							<div class="col-sm-9 col-xl-9">
+								<input asp-for="zalo" class="form-control form-control-sm" placeholder="Link Zalo">
+							</div>
+						</div>
+						<div class="form-group row mb-3">
+							<label asp-for="siteUrl" class="col-sm-3 col-xl-3 col-form-label font-weight-bolder text-muted">Site Url:</label>
+							<div class="col-sm-9 col-xl-9">
+								<input asp-for="siteUrl" class="form-control form-control-sm" placeholder="Site Url">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-collapse">
+				<div class="card  mm-active">
+					<div class="card-header">
+						<div class="d-flex align-items-center font-weight-bolder text-primary">
+							<i class="bx bx-map-alt font-20"></i>
+							<span class="ml-2 text-uppercase">Địa chỉ</span>
+						</div>
+					</div>
+					<div class="card-body">
+						<div class="form-group row mb-3">
+							<label asp-for="addressObj.provinceId" class="col-sm-3 col-xl-3 col-form-label font-weight-bolder text-muted">Tỉnh / Thành phố: <span class="text-danger">*</span></label>
+							<div class="col-sm-9 col-xl-9 select2-sm">
+								<select class="single-select" asp-for="addressObj.provinceId" asp-items="ViewBag.ProvinceId" onchange="LoadDistrict(this,'#div_form_district','#form_data')">
+									<option value="0">--Chọn--</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group row mb-3">
+							<label asp-for="addressObj.districtId" class="col-sm-3 col-xl-3 col-form-label font-weight-bolder text-muted">Quận / Huyện: <span class="text-danger">*</span></label>
+							<div class="col-sm-9 col-xl-9 select2-sm" id="div_form_district">
+								<select class="single-select" asp-for="addressObj.districtId" asp-items="ViewBag.DistrictId" onchange="LoadWard(this,'#div_form_ward','#form_data')">
+									<option value="0">--Chọn--</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group row mb-3">
+							<label asp-for="addressObj.wardId" class="col-sm-3 col-xl-3 col-form-label font-weight-bolder text-muted">Xã / Phường: <span class="text-danger">*</span></label>
+							<div class="col-sm-9 col-xl-9 select2-sm" id="div_form_ward">
+								<select class="single-select" asp-for="addressObj.wardId" id="select_ward_id" asp-items="ViewBag.WardId">
+									<option value="0">--Chọn--</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group row mb-3">
+							<label asp-for="addressObj.addressText" class="col-sm-3 col-xl-3 col-form-label font-weight-bolder text-muted">Tên đường:</label>
+							<div class="col-sm-9 col-xl-9">
+								<input type="text" asp-for="addressObj.addressText" class="form-control form-control-sm" placeholder="Tên đường">
+							</div>
+						</div>
+						<div>
+							<label class="col-form-label font-weight-bolder text-muted">Chọn vị trí:</label>
+							<div class="card  mm-active border">
+								<div class="card-header">
+									<div class="row">
+										<div class="col-6 border">
+											<div class="text-center text-muted font-14 font-weight-bold p-2" id="gps-lat"></div>
+										</div>
+										<div class="col-6 border">
+											<div class="text-center text-muted font-14 font-weight-bold p-2" id="gps-lng"></div>
+										</div>
+									</div>
+								</div>
+								<div class="card-body">
+									<div class="pac-card rounded" id="pac-card">
+										<div>
+											<div id="title">Chọn vị trí</div>
+											<div id="type-selector" class="pac-controls">
+												<input type="radio" name="type" id="changetype-all" checked="checked" />
+												<label for="changetype-all" class="d-inline-flex align-items-center">
+													<i class="bx bx-border-all mr-1"></i>
+													<span>Tất cả</span>
+												</label>
+
+												<input type="radio" name="type" class="ml-1" id="changetype-establishment" />
+												<label for="changetype-establishment" class="d-inline-flex align-items-center">
+													<i class="bx bx-building-house mr-1"></i>
+													<span>Cơ sở</span>
+												</label>
+
+												<input type="radio" name="type" class="ml-1" id="changetype-address" />
+												<label for="changetype-address" class="d-inline-flex align-items-center">
+													<i class="bx bx-home-smile mr-1"></i>
+													<span>Địa chỉ</span>
+												</label>
+
+												<input type="radio" name="type" class="ml-1" id="changetype-geocode" hidden />
+												<label for="changetype-geocode" hidden>Mã địa lý</label>
+											</div>
+											<div id="strict-bounds-selector" class="pac-controls" hidden>
+												<input type="checkbox" id="use-strict-bounds" value="" />
+												<label for="use-strict-bounds">Giới hạn nghiêm ngặt</label>
+											</div>
+										</div>
+										<div id="pac-container">
+											<input id="pac-input" class="form-control form-control-sm" type="text" placeholder="Nhập địa chỉ" onkeydown="return (event.keyCode!=13);" maxlength="100" />
+										</div>
+									</div>
+									<div class="gmaps" id="map" style="height:370px;"></div>
+									<div id="infowindow-content">
+										<img src="" width="16" height="16" id="place-icon" />
+										<span id="place-name" class="title"></span><br />
+										<span id="place-address"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3">
+			<div id="collapse_images" class="accordion">
+				<div class="card">
+					<div class="card-header collapsed" data-toggle="collapse" href="#collapseThree">
+						<a class="card-title font-weight-bolder">
+							Hình ảnh
+						</a>
+					</div>
+					<div id="collapseThree" class="card-body collapse show" data-parent="#collapse_images">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<div class="card-header no-affter bg-light">
+										<div class="row justify-content-between align-items-center">
+											<div class="d-flex align-items-center">
+												<i class="bx bx-images font-20"></i>
+												<span class="text-uppercase ml-1">LOGO</span>
+											</div>
+											<div>
+												<button class="btn btn-twitter btn-sm" type="button" onclick="UploadImage('#form_data #input_logo', '#form_data #img_logo')" data-toggle="tooltip" data-placement="top" title="Tải lên">
+													<i class="bx bx-upload"></i>
+												</button>
+												<button class="btn btn-youtube btn-sm" type="button" onclick="RemoveImage('#form_data #input_logo', '#form_data #img_logo', '#form_data #imageLogo')" data-toggle="tooltip" data-placement="top" title="Xóa">
+													<i class="bx bx-trash"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+									<div class="card-body text-center" id="div_logo">
+										<span class="text-muted message_img"></span>
+										<img src="@Model.imageLogo" class="mw-100 rounded" id="img_logo" style="height: 100px !important; object-fit: contain" />
+										<input type="file" class="d-none" asp-for="imageLogoFile" accept="image/*" id="input_logo" />
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6 col-lg-12">
+								<div class="card">
+									<div class="card-header no-affter bg-light">
+										<div class="row justify-content-between align-items-center">
+											<div class="d-flex align-items-center">
+												<i class="bx bx-images font-20"></i>
+												<span class="text-uppercase ml-1">ICON</span>
+											</div>
+											<div>
+												<button class="btn btn-twitter btn-sm" type="button" onclick="UploadImage('#form_data #input_favicon', '#form_data #img_favicon')" data-toggle="tooltip" data-placement="top" title="Tải lên">
+													<i class="bx bx-upload"></i>
+												</button>
+												<button class="btn btn-youtube btn-sm" type="button" onclick="RemoveImage('#form_data #input_favicon', '#form_data #img_favicon', '#form_data #imageFavicon')" data-toggle="tooltip" data-placement="top" title="Xóa">
+													<i class="bx bx-trash"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+									<div class="card-body text-center">
+										<span class="text-muted message_img"></span>
+										<img src="@Model.imageFavicon" class="mw-100 rounded" id="img_favicon" style="height: 60px !important; object-fit: contain" />
+										<input type="file" class="d-none" asp-for="imageFaviconFile" accept="image/*" id="input_favicon" />
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6 col-lg-12">
+								<div class="card">
+									<div class="card-header no-affter bg-light">
+										<div class="row justify-content-between align-items-center">
+											<div class="d-flex align-items-center">
+												<i class="bx bx-images font-20"></i>
+												<span class="text-uppercase ml-1">QR CODE</span>
+											</div>
+											<div>
+												<button class="btn btn-twitter btn-sm" type="button" onclick="UploadImage('#form_data #input_qrcode', '#form_data #img_qrcode')" data-toggle="tooltip" data-placement="top" title="Tải lên">
+													<i class="bx bx-upload"></i>
+												</button>
+												<button class="btn btn-youtube btn-sm" type="button" onclick="RemoveImage('#form_data #input_qrcode', '#form_data #img_qrcode', '#form_data #imageQrcode')" data-toggle="tooltip" data-placement="top" title="Xóa">
+													<i class="bx bx-trash"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+									<div class="card-body text-center">
+										<span class="text-muted message_img"></span>
+										<img src="@Model.imageQrcode" class="mw-100 rounded" id="img_qrcode" style="height: 60px !important; object-fit: contain" />
+										<input type="file" class="d-none" asp-for="imageQrcodeFile" accept="image/*" id="input_qrcode" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card-header">
+					<a class="card-title font-weight-bolder">
+						Hoàn thành
+					</a>
+				</div>
+				<div class="card-footer">
+					<button class="btn btn-success btn-sm w-100" data-style="zoom-in" type="submit" id="btn_submit_form">Cập nhật</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+

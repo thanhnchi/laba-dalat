@@ -1,0 +1,56 @@
+﻿@{
+	var farmInfo = ViewBag.FarmInfo as LABA_WebPortal_Corporate.Models.M_Farm;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="@ViewData["Description"]">
+	<meta name="keywords" content="@ViewData["Keywords"]">
+	<meta name="author" content="@farmInfo.name">
+	<title>@ViewData["Title"] @ViewData["Slogan"]</title>
+	<link rel="shortcut icon" href="@(farmInfo.imageFavicon ?? "/favicon.ico")">
+	<!-- Facebook, Zalo, Telegram Meta Tags -->
+	<meta property="og:image" content="@ViewData["ImagePreview"]" />
+	<meta property="og:image:alt" content="@ViewData["Title"]" />
+	<meta property="og:type" content="website" />
+	<meta property="og:locale" content="vi" />
+	@*<meta property="og:url" content="@KS_WebPortal.Lib.GlobalVariables.url_domain" />*@
+	<meta property="og:site_name" content="@farmInfo.siteUrl" />
+	<meta property="og:title" content="@ViewData["Title"]" />
+	<meta property="og:description" content="@ViewData["Description"]" />
+	<meta property="og:url" href="@(new Uri($"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}{Context.Request.QueryString}"))" />
+	<!-- Twitter Meta Tags -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:image" content="@ViewData["ImagePreview"]" />
+	<meta name="twitter:title" content="@ViewData["Title"]" />
+	<meta name="twitter:description" content="@ViewData["Description"]" />
+
+	<!-- styles-->
+	<partial name="P_Styles" />
+	<!-- /styles-->
+	@await RenderSectionAsync(name: "Styles", required: false)
+</head>
+
+<body>
+	<!-- content-wrapper -->
+	<div class="content-wrapper">
+		<!-- header -->
+		<partial name="P_Header" />
+		<!-- /header -->
+		@RenderBody()
+	</div>
+	<!-- /content-wrapper -->
+	<!-- footer -->
+	<partial name="P_Footer" />
+	<!-- /footer -->
+	<!-- scripts -->
+	<partial name="P_Scripts" />
+	<!-- /scripts -->
+	<partial name="P_ValidationScripts" />
+	@await RenderSectionAsync(name: "Scripts", required: false)
+</body>
+
+</html>

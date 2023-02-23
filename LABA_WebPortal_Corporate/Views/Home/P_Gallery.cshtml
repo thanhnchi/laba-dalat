@@ -1,0 +1,56 @@
+﻿@{
+	var farmInfo = ViewBag.FarmInfo as LABA_WebPortal_Corporate.Models.M_Farm;
+}
+<section class="wrapper bg-gradient-reverse-sky">
+	<div class="container py-10">
+		<div class="row">
+			<div class="col-lg-9 col-xl-8 col-xxl-7 mx-auto text-center">
+				<h2 class="fs-15 text-uppercase mb-3 p-2 badge bg-orange rounded-pill">Bộ sưu tập</h2>
+				<h3 class="display-4 mb-10">Một số hình ảnh của @farmInfo.name</h3>
+			</div>
+			<!-- /column -->
+		</div>
+		<!-- /.row -->
+		<div class="row">
+			<div class="gallety-list">
+				<figure class="hover-scale rounded gallery-item">
+					<a href="~/assets/img/gallery/tongquanlaba.png" data-glightbox="title: Toàn cảnh @farmInfo.name từ trên cao" data-gallery="g1">
+						<img src="~/assets/img/gallery/tongquanlaba.png" />
+					</a>
+				</figure>
+				<figure class="hover-scale rounded gallery-item">
+					<a href="~/assets/img/gallery/doan-khach-du-lich-den-voi-laba.JPG" data-glightbox="title: Hình ảnh đoàn khách du lịch đến với @farmInfo.name" data-gallery="g1">
+						<img src="~/assets/img/gallery/doan-khach-du-lich-den-voi-laba.JPG" />
+					</a>
+				</figure>
+				<figure class="hover-scale rounded gallery-item">
+					<a href="~/assets/img/gallery/nongtraitalaba.jpg" data-glightbox="title: Trang trại tại @farmInfo.name" data-gallery="g1">
+						<img src="~/assets/img/gallery/nongtraitalaba.jpg" />
+					</a>
+				</figure>
+				<figure class="hover-scale rounded gallery-item">
+					<a href="~/assets/img/gallery/trong-dau-tay-tai-laba.JPG" data-glightbox="title: Cùng chuyên gia chăm sóc dâu tây" data-gallery="g1">
+						<img src="~/assets/img/gallery/trong-dau-tay-tai-laba.JPG" />
+					</a>
+				</figure>
+				<figure class="hover-scale rounded gallery-item">
+					<a href="~/assets/img/gallery/phong-canh-thoi-tiet-tai-laba.jpg" data-glightbox="title: Phong cảnh và thời tiết tại @farmInfo.name" data-gallery="g1">
+						<img src="~/assets/img/gallery/phong-canh-thoi-tiet-tai-laba.jpg" />
+					</a>
+				</figure>
+				<figure class="hover-scale rounded gallery-item">
+					<a href="~/assets/img/gallery/cuoc-hop-tai-van-phong-laba.jpg" data-glightbox="title: Một buổi họp tại văn phòng @farmInfo.name" data-gallery="g1">
+						<img src="~/assets/img/gallery/cuoc-hop-tai-van-phong-laba.jpg" />
+					</a>
+				</figure>
+			</div>
+		</div>
+	</div>
+	<!-- /.container -->
+	<div class="overflow-hidden">
+		<div class="divider text-white mx-n2">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 92.26"><path fill="currentColor" d="M1206,21.2c-60-5-119-36.92-291-5C772,51.11,768,48.42,708,43.13c-60-5.68-108-29.92-168-30.22-60,.3-147,27.93-207,28.23-60-.3-122-25.94-182-36.91S30,5.93,0,16.2V92.26H1440v-87l-30,5.29C1348.94,22.29,1266,26.19,1206,21.2Z" /></svg>
+		</div>
+	</div>
+</section>
+<!-- /section -->
